@@ -16,10 +16,11 @@ public class Marks {
                     "03. average_s {subjectID} = get average marks for a subject\n" +
                     "04. average {studentID} = get average marks for a student\n" +
                     "05. total {studentID} = get total marks for a student\n" +
-                    "06. exit = exit the program\n");
+                    "06. grades = show grades for all students\n" +
+                    "07. exit = exit the program\n");
             String command = sc.next();
             
-            if (command == "add") {
+            if (command.equals("add")) {
                 int studentID = sc.nextInt();
                 System.out.println("Enter marks for student " + studentID + ":");
                 System.out.print("Mathematics: ");
@@ -30,7 +31,7 @@ public class Marks {
                 matrix[studentID-1][2] = sc.nextDouble();
                 System.out.println("Marks added successfully.");
                 
-            } else if (command == "update") {
+            } else if (command.equals("update")) {
                 int studentID = sc.nextInt();
                 int subjectID = sc.nextInt();
                 System.out.print("Enter new mark: ");
@@ -38,7 +39,7 @@ public class Marks {
                 matrix[studentID-1][subjectID-1] = newMark;
                 System.out.println("Mark updated successfully.");
                 
-            } else if (command == "average_s") {
+            } else if (command.equals("average_s")) {
                 int subjectID = sc.nextInt();
                 double sum = 0;
                 for (int i = 0; i < n; i++) {
@@ -47,18 +48,34 @@ public class Marks {
                 double average = sum / n;
                 System.out.println("Average for subject " + subjectID + ": " + average);
                 
-            } else if (command == "average") {
+            } else if (command.equals("average")) {
                 int studentID = sc.nextInt();
                 double sum = matrix[studentID-1][0] + matrix[studentID-1][1] + matrix[studentID-1][2];
                 double average = sum / 3;
                 System.out.println("Average for student " + studentID + ": " + average);
                 
-            } else if (command == "total") {
+            } else if (command.equals("total")) {
                 int studentID = sc.nextInt();
                 double total = matrix[studentID-1][0] + matrix[studentID-1][1] + matrix[studentID-1][2];
                 System.out.println("Total marks for student " + studentID + ": " + total);
+
+            } else if (command.equals("grades")) {
+                System.out.println("\nGrades Summary:");
+                System.out.println("Student ID\tMathematics\tChemistry\tPhysics");
                 
-            } else if (command == "exit") {
+                for (int i = 0; i < n; i++) {
+                    System.out.print((i+1) + "\t\t");
+                    for (int j = 0; j < 3; j++) {
+                    
+                    if (matrix[i][j] >= 90) System.out.print("A\t\t");
+                    else if (matrix[i][j] >= 80) System.out.print("B\t\t");
+                    else if (matrix[i][j] >= 70) System.out.print("C\t\t");
+                    else if (matrix[i][j] >= 60) System.out.print("D\t\t");
+                    else System.out.print("Fail\t\t");
+                    }
+                    System.out.println();
+                }
+            } else if (command.equals("exit")) {
                 break;
                 
             } else {

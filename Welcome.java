@@ -11,5 +11,7 @@ public class Welcome {
         String lastName = sc.nextLine();
 
         System.out.printf("Welcome to the Second Year %s %s!", firstName, lastName);
+
+        sc.close();
     }
 }
